@@ -90,7 +90,7 @@ Como a aplicação é 100% frontend (sem backend) e precisa de HTTPS para abrir 
    - Framework preset: `Vite`.
    - Build command: `npm run build`.
    - Output directory: `dist`.
-   - Roteamento SPA automático com `public/_redirects`.
+   - Roteamento SPA configurado nativamente no `wrangler.json` (`not_found_handling: single-page-application`).
 2. **Vercel**:
    - Conectar com repositório GitHub ou rodar `npx vercel`.
    - Arquivo de rota já configurado: `vercel.json`.
