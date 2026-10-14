@@ -85,8 +85,8 @@
 
 ## Publicação Gratuita (Sem Custos & Com HTTPS)
 Como a aplicação é 100% frontend (sem backend) e precisa de HTTPS para abrir a câmera no celular:
-1. **Cloudflare Pages** (100% gratuito e tráfego ilimitado):
-   - Conectar repositório GitHub `CatolicoGO`.
+1. **Cloudflare Pages / Workers**:
+   - URL de Produção: `https://catolicogo.thiagoppiovesan.workers.dev`
    - Framework preset: `Vite`.
    - Build command: `npm run build`.
    - Output directory: `dist`.
