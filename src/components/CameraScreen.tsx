@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Camera, RefreshCw, AlertCircle, Sparkles } from 'lucide-react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { getAllSaints } from '../services/storage';
+import { DEV_MODE } from '../config';
 
 interface CameraScreenProps {
   onScanSuccess: (decodedText: string) => void;
@@ -43,7 +44,9 @@ export const CameraScreen: React.FC<CameraScreenProps> = ({
     } catch (err: any) {
       console.warn('Erro ao inicializar câmera:', err);
       setCameraError(
-        'Não foi possível acessar a câmera. Verifique se deu permissão ou use o modo simulação abaixo.'
+        DEV_MODE
+          ? 'Não foi possível acessar a câmera. Verifique se deu permissão ou use o modo simulação abaixo.'
+          : 'Não foi possível acessar a câmera. Verifique se concedeu permissão nas configurações do navegador.'
       );
       setIsScanning(false);
     }
@@ -152,34 +155,36 @@ export const CameraScreen: React.FC<CameraScreenProps> = ({
           )}
         </div>
 
-        {/* Modo Simulação / Teste Rápido */}
-        <div className="mt-4 bg-[#F7ECE0] border-2 border-[#DEC9B0] rounded-2xl p-3 shadow-sm">
-          <span className="text-[11px] font-black text-[#7A4F26] uppercase tracking-wider block mb-1.5 flex items-center gap-1">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            Simulador de Captura (Teste Rápido)
-          </span>
-          <form onSubmit={handleManualSubmit} className="flex gap-2">
-            <select
-              value={testCode}
-              onChange={(e) => setTestCode(e.target.value)}
-              className="flex-1 px-3 py-2 text-xs rounded-xl bg-white border border-[#D5BEA1] text-[#4A2E16] font-medium focus:outline-none focus:ring-2 focus:ring-amber-500"
-            >
-              <option value="">Selecione um Santo para coletar...</option>
-              {getAllSaints().map((saint) => (
-                <option key={saint.id} value={saint.code}>
-                  {saint.name}
-                </option>
-              ))}
-            </select>
-            <button
-              type="submit"
-              disabled={!testCode}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-xs flex items-center gap-1 shadow disabled:opacity-40 active:scale-95 transition"
-            >
-              Coletar 📦
-            </button>
-          </form>
-        </div>
+        {/* Modo Simulação / Teste Rápido (Apenas com DEV_MODE ativo) */}
+        {DEV_MODE && (
+          <div className="mt-4 bg-[#F7ECE0] border-2 border-[#DEC9B0] rounded-2xl p-3 shadow-sm">
+            <span className="text-[11px] font-black text-[#7A4F26] uppercase tracking-wider block mb-1.5 flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              Simulador de Captura (Teste Rápido)
+            </span>
+            <form onSubmit={handleManualSubmit} className="flex gap-2">
+              <select
+                value={testCode}
+                onChange={(e) => setTestCode(e.target.value)}
+                className="flex-1 px-3 py-2 text-xs rounded-xl bg-white border border-[#D5BEA1] text-[#4A2E16] font-medium focus:outline-none focus:ring-2 focus:ring-amber-500"
+              >
+                <option value="">Selecione um Santo para coletar...</option>
+                {getAllSaints().map((saint) => (
+                  <option key={saint.id} value={saint.code}>
+                    {saint.name}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="submit"
+                disabled={!testCode}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-xs flex items-center gap-1 shadow disabled:opacity-40 active:scale-95 transition"
+              >
+                Coletar 📦
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

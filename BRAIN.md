@@ -28,6 +28,7 @@
 - **Suporte Offline**: Service Worker/PWA para garantir funcionamento sem internet.
 
 ## Estrutura da Aplicação (v1)
+- `src/config.ts`: Configurações globais (`DEV_MODE = false` para testes em produção e ocultar o simulador).
 - `src/types/saint.ts`: Interfaces de dados (Saint, PlayerProfile, ScreenState).
 - `src/data/saints.ts`: Base oficial de 13 figuras ilustradas (Nossa Senhora Aparecida, São José, Santa Dulce, Santa Teresinha, Santo Antônio de Pádua, São Bento, São Francisco de Assis, São Carlo Acutis, Santos Arcanjos, São Padre Pio, São Pier Giorgio Frassati, São Vicente de Paulo, Venerável Guido Schäffer).
 - `src/services/storage.ts`: Persistência em `localStorage` e resolução de QR Codes.
