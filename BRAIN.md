@@ -66,12 +66,18 @@
   - Moldura kraft com doodles infantis (`#E5CDB2`).
   - Card central bege com efeito 3D em tipografia dourada/caramelo.
   - Ilustração com auréola luminosa.
-  - 4 seções lúdicas em cards brancos:
-    1. 🪚🔨 Quem sou eu?
-    2. 😴⭐ Curiosidades
-    3. 📅🌸 Datas Especiais
-    4. 👨‍👩‍👧✝ O que eu ensino
+  - 4 seções lúdicas em cards brancos (ícones individuais sem doodles externos):
+    1. ❓ Quem sou eu?
+    2. ⭐ Curiosidades
+    3. 📅 Datas Especiais
+    4. ✝ O que eu ensino
   - Botão de ação: "COLETADO! SALVAR NO ÁLBUM! 📦" e navegação amadeirada MAPA / ÁLBUM.
+
+## Autenticação da Área da Catequista
+- Tela de bloqueio antes de acessar o Painel do Catequista.
+- **Login**: `admin`
+- **Senha**: `igrejameninodeus`
+- Sessão mantida em `sessionStorage` com opção de "Sair" (Logout).
 
 
 ## Comandos Úteis

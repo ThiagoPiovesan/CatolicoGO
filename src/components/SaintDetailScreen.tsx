@@ -54,10 +54,6 @@ export const SaintDetailScreen: React.FC<SaintDetailScreenProps> = ({
       {/* Moldura externa de artesanato lúdico */}
       <div className="relative w-full max-w-md mx-auto bg-[#FFFDF7] rounded-[32px] border-4 border-[#CFAF88] shadow-2xl p-4 sm:p-5 flex flex-col justify-between min-h-[92vh] overflow-hidden">
         
-        {/* Doodles decorativos nos cantos da moldura */}
-        <div className="absolute top-2 left-3 text-xs opacity-60 pointer-events-none">🪚 ⭐</div>
-        <div className="absolute top-2 right-3 text-xs opacity-60 pointer-events-none">🔨 🌸</div>
-
         {/* Cabeçalho do Card */}
         <div>
           {/* Botão de voltar */}
@@ -113,7 +109,7 @@ export const SaintDetailScreen: React.FC<SaintDetailScreenProps> = ({
           {/* 1. Quem sou eu? */}
           <div className="bg-white/95 rounded-2xl border-2 border-[#E5D5BF] p-3 shadow-sm hover:shadow transition">
             <div className="flex items-center gap-1.5 mb-1 text-[11px] font-black text-[#683F1A] uppercase tracking-wide">
-              <span>🪚🔨</span>
+              <span>❓</span>
               <span>QUEM SOU EU?</span>
             </div>
             <p className="text-[11px] leading-snug text-[#4A2E16] font-medium">
@@ -124,7 +120,7 @@ export const SaintDetailScreen: React.FC<SaintDetailScreenProps> = ({
           {/* 2. Curiosidades */}
           <div className="bg-white/95 rounded-2xl border-2 border-[#E5D5BF] p-3 shadow-sm hover:shadow transition">
             <div className="flex items-center gap-1.5 mb-1 text-[11px] font-black text-[#683F1A] uppercase tracking-wide">
-              <span>😴⭐</span>
+              <span>⭐</span>
               <span>CURIOSIDADES:</span>
             </div>
             <p className="text-[11px] leading-snug text-[#4A2E16] font-medium">
@@ -135,7 +131,7 @@ export const SaintDetailScreen: React.FC<SaintDetailScreenProps> = ({
           {/* 3. Datas Especiais */}
           <div className="bg-white/95 rounded-2xl border-2 border-[#E5D5BF] p-3 shadow-sm hover:shadow transition">
             <div className="flex items-center gap-1.5 mb-1 text-[11px] font-black text-[#683F1A] uppercase tracking-wide">
-              <span>📅🌸</span>
+              <span>📅</span>
               <span>DATAS ESPECIAIS:</span>
             </div>
             <p className="text-[11px] leading-snug text-[#4A2E16] font-medium">
@@ -146,7 +142,7 @@ export const SaintDetailScreen: React.FC<SaintDetailScreenProps> = ({
           {/* 4. O que eu ensino */}
           <div className="bg-white/95 rounded-2xl border-2 border-[#E5D5BF] p-3 shadow-sm hover:shadow transition">
             <div className="flex items-center gap-1.5 mb-1 text-[11px] font-black text-[#683F1A] uppercase tracking-wide">
-              <span>👨‍👩‍👧✝</span>
+              <span>✝</span>
               <span>O QUE EU ENSINO:</span>
             </div>
             <p className="text-[11px] leading-snug text-[#4A2E16] font-medium">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Printer, Plus, X, Sparkles, Church } from 'lucide-react';
+import { ArrowLeft, Printer, Plus, X, Sparkles, Church, Lock, LogOut } from 'lucide-react';
 import { Saint } from '../types/saint';
 import { getAllSaints, addCustomSaint } from '../services/storage';
 
@@ -10,6 +10,32 @@ interface CatechistPanelProps {
 export const CatechistPanel: React.FC<CatechistPanelProps> = ({ onBack }) => {
   const [saints, setSaints] = useState<Saint[]>(getAllSaints());
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Autenticação da área da catequista
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return sessionStorage.getItem('catechist_auth') === 'true';
+  });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (username.trim().toLowerCase() === 'admin' && password === 'igrejameninodeus') {
+      sessionStorage.setItem('catechist_auth', 'true');
+      setIsAuthenticated(true);
+      setAuthError('');
+    } else {
+      setAuthError('Usuário ou senha incorretos.');
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('catechist_auth');
+    setIsAuthenticated(false);
+    setUsername('');
+    setPassword('');
+  };
 
   // Form state para cadastrar novo santo
   const [name, setName] = useState('');
@@ -80,6 +106,79 @@ export const CatechistPanel: React.FC<CatechistPanelProps> = ({ onBack }) => {
     setImageUrl('');
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen px-4 py-8 max-w-md mx-auto flex flex-col justify-center select-none">
+        <div className="bg-[#FFFDF7] border-4 border-[#CFAF88] rounded-[32px] p-6 shadow-2xl flex flex-col items-center">
+          <div className="w-16 h-16 rounded-2xl bg-[#EEDCC7] border-2 border-[#CBB08E] flex items-center justify-center text-[#5C3B1E] mb-4 shadow-sm">
+            <Lock className="w-8 h-8 stroke-[2.5]" />
+          </div>
+
+          <span className="text-[11px] font-black text-[#A66E28] uppercase tracking-wider flex items-center gap-1 mb-1">
+            <Church className="w-3.5 h-3.5" /> Igreja Menino Deus
+          </span>
+          <h2 className="text-xl font-black text-[#4A2E16] mb-1">Área da Catequista</h2>
+          <p className="text-xs text-[#7A4F26] font-medium text-center mb-6">
+            Digite as credenciais de acesso para gerenciar e imprimir os cartões dos Santos.
+          </p>
+
+          <form onSubmit={handleLogin} className="w-full space-y-4">
+            {authError && (
+              <div className="bg-red-50 border-2 border-red-200 text-red-700 text-xs font-bold rounded-xl p-3 text-center">
+                ⚠️ {authError}
+              </div>
+            )}
+
+            <div>
+              <label className="block text-xs font-black text-[#5C3B1E] mb-1.5 uppercase">
+                Usuário
+              </label>
+              <input
+                type="text"
+                autoCapitalize="none"
+                autoCorrect="off"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Ex: admin"
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#DEC9B0] bg-white text-[#4A2E16] font-medium text-sm focus:outline-none focus:border-[#A66E28]"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-black text-[#5C3B1E] mb-1.5 uppercase">
+                Senha
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••••••"
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[#DEC9B0] bg-white text-[#4A2E16] font-medium text-sm focus:outline-none focus:border-[#A66E28]"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3 mt-2 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-black text-sm tracking-wide shadow-lg active:scale-95 transition"
+            >
+              Entrar
+            </button>
+          </form>
+
+          <button
+            onClick={onBack}
+            className="mt-6 flex items-center gap-1.5 text-xs font-black text-[#7A4F26] hover:text-[#4A2E16] transition"
+          >
+            <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
+            Voltar ao Jogo
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen px-4 py-6 max-w-2xl mx-auto pb-16 select-none">
       {/* Top Header (escondido na impressão) */}
@@ -107,6 +206,15 @@ export const CatechistPanel: React.FC<CatechistPanelProps> = ({ onBack }) => {
           >
             <Printer className="w-4 h-4 stroke-[2.5]" />
             Imprimir Cartões
+          </button>
+
+          <button
+            onClick={handleLogout}
+            title="Sair da Área da Catequista"
+            className="px-3 py-2 rounded-2xl bg-[#F0DDD0] hover:bg-[#E7CCC0] border-2 border-[#DEC9B0] text-[#7A4F26] font-black transition active:scale-95 flex items-center gap-1 text-xs shadow-sm"
+          >
+            <LogOut className="w-4 h-4 stroke-[2.5]" />
+            Sair
           </button>
         </div>
       </div>
