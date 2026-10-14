@@ -79,17 +79,22 @@
 - Compilar para produção: `npm run build`
 - Executar via Docker: `docker compose up --build -d`
 
+## Repositório Oficial no GitHub
+- URL: `https://github.com/ThiagoPiovesan/CatolicoGO.git`
+- Branch principal: `main`
+
 ## Publicação Gratuita (Sem Custos & Com HTTPS)
-Como a aplicação é 100% frontend (sem backend) e precisa de HTTPS para abrir a câmera no celular, as melhores opções gratuitas são:
-1. **Vercel** (Recomendado):
-   - Comando direto no terminal: `npx vercel`
-   - Ou conectar com GitHub para deploy contínuo automático.
+Como a aplicação é 100% frontend (sem backend) e precisa de HTTPS para abrir a câmera no celular:
+1. **Cloudflare Pages** (100% gratuito e tráfego ilimitado):
+   - Conectar repositório GitHub `CatolicoGO`.
+   - Framework preset: `Vite`.
+   - Build command: `npm run build`.
+   - Output directory: `dist`.
+   - Roteamento SPA automático com `public/_redirects`.
+2. **Vercel**:
+   - Conectar com repositório GitHub ou rodar `npx vercel`.
    - Arquivo de rota já configurado: `vercel.json`.
-2. **Netlify Drop**:
-   - Rodar `npm run build` e arrastar a pasta `dist` no painel do Netlify.
-   - Arquivo de rota já configurado: `public/_redirects`.
-3. **Cloudflare Pages**:
-   - Conectar repositório GitHub, comando `npm run build`, pasta de saída `dist`.
+
 
 
 
